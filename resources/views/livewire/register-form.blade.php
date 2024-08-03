@@ -25,6 +25,6 @@
         <span wire:loading.class="hidden">Register</span>
     </button>
 
-    <p class="text-gray-400 text-sm font-medium mt-6 mb-4">Sudah terdaftar? <a href="{{ route('auth.login') }}"
+    <p class="text-gray-400 text-sm font-medium my-4">Sudah terdaftar? <a href="{{ route('auth.login') }}"
             class="text-blue-600 hover:underline">Login</a></p>
 </form>
