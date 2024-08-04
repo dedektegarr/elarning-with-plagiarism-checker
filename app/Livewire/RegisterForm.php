@@ -28,10 +28,12 @@ class RegisterForm extends Component
         $user = User::create($validated);
 
         if (Auth::loginUsingId($user->user_id, true)) {
+            flash('Selamat datang ' . '<b style="text-transform: capitalize;">' . $user->name . '</b>', 'success');
+
             return redirect()->route('dashboard.index');
         }
 
-        $this->dispatch('error');
+        flash('Terjadi kesalahan, coba lagi beberapa saat', 'error');
     }
 
     public function render()
