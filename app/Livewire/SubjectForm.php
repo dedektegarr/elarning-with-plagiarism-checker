@@ -22,6 +22,7 @@ class SubjectForm extends Component
 
         $subject->users()->attach(Auth::user()->user_id);
 
+        $this->dispatch('subject-created');
         flash('Kelas berhasil dibuat', 'success');
 
         $this->reset(['name', 'code']);
