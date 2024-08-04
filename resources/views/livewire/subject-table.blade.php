@@ -79,4 +79,6 @@
             </tr>
         @endforelse
     </tbody>
+
+    {{-- {{ $subjects->links() }} --}}
 </table>

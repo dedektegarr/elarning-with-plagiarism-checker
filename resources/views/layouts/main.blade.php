@@ -7,8 +7,8 @@
 
     <title>{{ $title }} | {{ config('app.name') }}</title>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-900">
