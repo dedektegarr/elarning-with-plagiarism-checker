@@ -18,6 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('pages.dashboard.index', ['title' => 'Dashboard']);
     })->name('dashboard.index');
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 
 Route::middleware('guest')->group(function () {
