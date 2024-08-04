@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -12,7 +13,14 @@ class SubjectTable extends Component
 {
     use WithPagination;
 
-    #[On('subject-created')]
+    public function deleteSubject($id)
+    {
+        Subject::where('subject_id', $id)->delete();
+
+        flash('Kelas berhasil dihapus', 'success');
+    }
+
+    #[On('subject-updated')]
     public function render()
     {
         $user = User::where('user_id', Auth::user()->user_id)->first();

@@ -3,8 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\Subject;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Auth;
 
 class SubjectForm extends Component
 {
@@ -22,7 +23,7 @@ class SubjectForm extends Component
 
         $subject->users()->attach(Auth::user()->user_id);
 
-        $this->dispatch('subject-created');
+        $this->dispatch('subject-updated');
         flash('Kelas berhasil dibuat', 'success');
 
         $this->reset(['name', 'code']);

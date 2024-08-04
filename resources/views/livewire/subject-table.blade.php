@@ -25,7 +25,7 @@
                     {{ $subject->code }}
                 </th>
                 <td class="capitalize px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <a href="">{{ $subject->name }}</a>
+                    <a href="{{ route('subject.show', $subject->subject_id) }}">{{ $subject->name }}</a>
                 </td>
                 <td class="px-6 py-4">
                     {{-- @dd($subject->teachers) --}}
@@ -48,7 +48,8 @@
                     </a>
                 </td>
                 <td class="px-6 py-4">
-                    <button type="button" data-modal-target="add-subject-modal" data-modal-toggle="add-subject-modal"
+                    <button type="button" data-modal-target="edit-subject-modal-{{ $subject->subject_id }}"
+                        data-modal-toggle="edit-subject-modal-{{ $subject->subject_id }}"
                         class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm p-3 text-center inline-flex items-center me-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
                         <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                             height="24" fill="none" viewBox="0 0 24 24">
@@ -57,7 +58,7 @@
                         </svg>
                     </button>
 
-                    <button type="button" data-modal-target="add-subject-modal" data-modal-toggle="add-subject-modal"
+                    <button wire:click="deleteSubject({{ $subject->subject_id }})" type="button"
                         class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-3 text-center inline-flex items-center me-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                         <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                             height="24" fill="currentColor" viewBox="0 0 24 24">

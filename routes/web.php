@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard.index');
 
     Route::get('/subjects', [SubjectController::class, 'index'])->name('subject.index');
+    Route::get('/subjects/{subject}', [SubjectController::class, 'show'])->name('subject.show');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });

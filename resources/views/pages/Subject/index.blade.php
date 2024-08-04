@@ -6,6 +6,10 @@
         <livewire:subject-form />
     </x-modal>
 
+    <x-modal title="Edit Kelas" id="edit-subject-modal">
+        <livewire:subject-form />
+    </x-modal>
+
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div class="flex justify-between items-center">
             <div class="pb-4 bg-white dark:bg-gray-900">
