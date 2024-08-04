@@ -18,7 +18,7 @@
         <div class="p-4 sm:ml-64 mt-16 sm:mt-14">
             @include('layouts.partials.breadcrumb')
 
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Dashboard</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">{{ $title }}</h1>
 
             <main class="mt-6">
                 @yield('content')

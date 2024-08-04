@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('pages.dashboard.index', ['title' => 'Dashboard']);
     })->name('dashboard.index');
+
+    Route::get('/subjects', [SubjectController::class, 'index'])->name('subject.index');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
