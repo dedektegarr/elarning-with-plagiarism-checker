@@ -33,11 +33,10 @@
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">
-                            <p class="capitalize text-sm text-gray-900 dark:text-white" role="none">
+                            <p class="capitalize font-medium text-sm text-gray-900 dark:text-white" role="none">
                                 {{ Auth::user()->name }}
                             </p>
-                            <p class="uppercase text-sm font-medium text-gray-900 truncate dark:text-gray-300"
-                                role="none">
+                            <p class="uppercase text-xs text-gray-900 truncate dark:text-gray-300" role="none">
                                 {{ Auth::user()->username }}
                             </p>
                         </div>

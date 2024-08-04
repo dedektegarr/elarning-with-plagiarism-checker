@@ -16,7 +16,7 @@ class RegisterForm extends Component
     public function registerUser()
     {
         $validated = $this->validate([
-            'name' => 'required|min:1|max:80|regex:/^[\pL\s\-]+$/u',
+            'name' => 'required|min:1|max:80',
             'username' => 'required|alpha_num:ascii|unique:users',
             'gender' => 'required',
             'password' => 'required|min:6'

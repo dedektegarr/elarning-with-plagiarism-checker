@@ -6,14 +6,13 @@
     <div class="grid gap-4 mb-4 grid-cols-2">
         <div class="col-span-2">
             <label for="code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode kelas</label>
-            <input type="text" name="code" id="code" wire:model="code"
+            <input type="text" name="code" id="code" wire:model="code" autocomplete="off"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Tulis kode kelas">
         </div>
         <div class="col-span-2">
-            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
-                kelas</label>
-            <input type="text" name="name" id="name" wire:model="name"
+            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
+            <input type="text" name="name" id="name" wire:model="name" autocomplete="off"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Tulis nama kelas">
         </div>
@@ -26,6 +25,7 @@
                 clip-rule="evenodd"></path>
         </svg>
         <span class="hidden" wire:loading.class="!block">Tunggu...</span>
-        <span wire:loading.class="hidden">Tambah Kelas</span>
+        <span wire:loading.class="hidden">Tambah kelas</span>
+
     </button>
 </form>
