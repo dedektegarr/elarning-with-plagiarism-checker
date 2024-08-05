@@ -13,6 +13,10 @@ class SubjectController extends Controller
 
     public function show(Subject $subject)
     {
-        return view('pages.subject.show', ['title' => $subject->name, 'subject' => $subject]);
+        $studentCount = $subject->users->filter(function ($user) {
+            return $user->role === 'student';
+        })->count();
+
+        return view('pages.subject.show', ['title' => $subject->name, 'subject' => $subject, 'student_count' => $studentCount]);
     }
 }

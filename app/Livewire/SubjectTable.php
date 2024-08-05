@@ -109,11 +109,11 @@ final class SubjectTable extends PowerGridComponent
                 ->searchable(),
 
             Column::make('Nama kelas', 'name')
-                ->bodyAttribute('font-bold dark:text-white text-gray-900 hover:underline')
+                ->bodyAttribute('font-bold dark:text-white text-gray-900 hover:underline capitalize')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Dosen pengampu', 'teachers')->searchable()->sortable(),
+            Column::make('Dosen pengampu', 'teachers')->bodyAttribute('capitalize')->searchable()->sortable(),
 
             Column::make('Jumlah mahasiswa', 'student_count'),
 
