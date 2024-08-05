@@ -9,6 +9,10 @@ class AssignmentController extends Controller
 {
     public function show(Topic $topic)
     {
-        return view('pages.assignment.show', ['title' => 'Tugas: ' . $topic->name]);
+        $users = $topic->subject->users->filter(function ($user) {
+            return $user->role === 'student';
+        });
+
+        return view('pages.assignment.show', ['title' => 'Tugas: ' . $topic->name, 'students' => $users]);
     }
 }

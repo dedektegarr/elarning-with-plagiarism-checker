@@ -3,11 +3,11 @@
         <li>
             <article
                 class="bg-gray-50 dark:bg-gray-800 rounded-md py-4 px-5 flex gap-2 flex-wrap items-center justify-between hover:shadow-lg">
-                <h6 class="text-gray-900 capitalize dark:text-gray-400 line-clamp-1">{{ $topic->name }}</h6>
+                <h6 class="text-gray-900 capitalize dark:text-gray-400 line-clamp-1 font-bold">{{ $topic->name }}</h6>
                 <div class="flex items-center">
                     <a href="{{ route('assignment.show', $topic->topic_id) }}"
                         class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center me-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
-                        Periksa tugas
+                        Tugas
                     </a>
 
                     <button type="button" wire:click="deleteTopic({{ $topic->topic_id }})"
