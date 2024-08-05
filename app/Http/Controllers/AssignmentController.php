@@ -13,6 +13,6 @@ class AssignmentController extends Controller
             return $user->role === 'student';
         });
 
-        return view('pages.assignment.show', ['title' => 'Tugas: ' . $topic->name, 'students' => $users]);
+        return view('pages.assignment.show', ['title' => 'Tugas: ' . $topic->name, 'students' => $users, 'topic' => $topic]);
     }
 }

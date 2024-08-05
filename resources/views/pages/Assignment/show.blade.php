@@ -1,6 +1,16 @@
 @extends('layouts.main')
 
 @section('content')
+    <div>
+        <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300"
+            role="alert">
+            Anda belum mengumpulkan tugas pada topik ini!
+        </div>
+
+        <livewire:upload-assignment :topic="$topic" />
+    </div>
+
+
     <ul class="max-w-lg mx-auto divide-y divide-gray-200 dark:divide-gray-700">
         @foreach ($students as $student)
             <li class="">
