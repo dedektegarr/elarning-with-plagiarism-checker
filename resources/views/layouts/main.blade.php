@@ -11,7 +11,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-gray-50 dark:bg-gray-900">
+<body class="bg-gray-50 dark:bg-gray-900 overflow-x-hidden">
     @if (auth()->check())
         @include('layouts.partials.navbar')
         @include('layouts.partials.sidebar')
