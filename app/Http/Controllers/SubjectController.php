@@ -13,6 +13,6 @@ class SubjectController extends Controller
 
     public function show(Subject $subject)
     {
-        return view('pages.subject.show', ['title' => $subject->name]);
+        return view('pages.subject.show', ['title' => $subject->name, 'subject' => $subject]);
     }
 }
