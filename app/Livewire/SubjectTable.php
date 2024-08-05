@@ -35,8 +35,8 @@ final class SubjectTable extends PowerGridComponent
         return [
             Header::make()->showSearchInput()->showToggleColumns(),
             Footer::make()
-                ->showPerPage()
-                ->showRecordCount()
+                ->showPerPage(10)
+            // ->showRecordCount()
             // ->pagination('components.pagination'),
         ];
     }
