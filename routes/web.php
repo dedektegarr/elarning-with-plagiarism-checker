@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/subjects', [SubjectController::class, 'index'])->name('subject.index');
     Route::get('/subjects/{subject}', [SubjectController::class, 'show'])->name('subject.show');
+    Route::get('/subjects/{subject}/topics', [SubjectController::class, 'show'])->name('subject.show');
+    // Route::get('/subjects/{subject}/topics/{topic}', [SubjectController::class, 'assignment'])->name('subject.assignment');
+
+    Route::get('/assignments/{topic}', [AssignmentController::class, 'show'])->name('assignment.show');
+
+
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });

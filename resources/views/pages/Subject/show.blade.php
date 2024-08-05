@@ -11,12 +11,6 @@
             <li class="me-2" role="presentation">
                 <button
                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                    id="assignment-tab" data-tabs-target="#assignment" type="button" role="tab"
-                    aria-controls="assignment" aria-selected="false">Tugas</button>
-            </li>
-            <li class="me-2" role="presentation">
-                <button
-                    class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                     id="student-tab" data-tabs-target="#student" type="button" role="tab" aria-controls="student"
                     aria-selected="false">Mahasiswa
                     <span
@@ -44,14 +38,6 @@
             </button>
 
             <livewire:topic-lists :subjectId="$subject->subject_id" />
-        </div>
-        <div class="hidden" id="assignment" role="tabpanel" aria-labelledby="assignment-tab">
-            <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-                    class="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</strong>.
-                Clicking
-                another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
-                control
-                the content visibility and styling.</p>
         </div>
         <div class="hidden" id="student" role="tabpanel" aria-labelledby="student-tab">
             <livewire:student-table :subject="$subject" />
