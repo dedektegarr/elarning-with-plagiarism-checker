@@ -2,6 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Helpers\PDFService;
+use App\Models\Assignment;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
@@ -22,9 +25,39 @@ class UploadAssignment extends Component
         ]);
     }
 
-    public function uploadAssignment()
+    public function uploadAssignment(PDFService $pdfService)
     {
-        dd($this->file);
+        $pathname = $this->file->getPathname();
+
+        // Parsing Doc's Metadata
+        $parseMetadata = $pdfService->parseMetadata($pathname);
+
+        $metadata = [
+            'title' => $parseMetadata['Title'] ?? null,
+            'author' => $parseMetadata['Author'] ?? null,
+            'pages' => $parseMetadata['Pages'] ?? null,
+            'subject' => $parseMetadata['Subject'] ?? null,
+            'creator' => $parseMetadata['Creator'] ?? null,
+            'producer' => $parseMetadata['Producer'] ?? null,
+            'creation_date' => $parseMetadata['CreationDate'] ?? null,
+            'mod_date' => $parseMetadata['ModDate']
+        ];
+
+        // Preprocess document words
+        $metadata['word_tokens'] = $pdfService->preprocessDocument($pathname);
+
+        // Upload file and get pathname
+        $uploadedFile = $pdfService->uploadPdf($this->file);
+
+        // Store assignment
+        $assignment = Assignment::create([
+            'topic_id' => $this->topic->topic_id,
+            'user_id' => Auth::user()->user_id,
+            'file' => $uploadedFile
+        ]);
+
+        // store metadata
+        $assignment->metadata()->create($metadata);
     }
 
     public function render()

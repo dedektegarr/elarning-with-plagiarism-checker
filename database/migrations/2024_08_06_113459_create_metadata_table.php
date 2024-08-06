@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('metadata', function (Blueprint $table) {
             $table->id('metadata_id');
             $table->unsignedBigInteger('assignment_id');
-            $table->string('title', 100);
-            $table->string('author', 80);
-            $table->integer('pages');
-            $table->timestamp('creation_date');
-            $table->timestamp('mod_date');
+            $table->string('title', 100)->nullable();
+            $table->string('author', 80)->nullable();
+            $table->string('creator', 80)->nullable();
+            $table->string('producer', 80)->nullable();
+            $table->string('subject', 100)->nullable();
+            $table->integer('pages')->nullable();
+            $table->timestamp('creation_date')->nullable();
+            $table->timestamp('mod_date')->nullable();
+            $table->text('word_tokens');
             $table->timestamps();
 
             $table->foreign('assignment_id')->references('assignment_id')->on('assignments')->onDelete('cascade')->onUpdate('cascade');
