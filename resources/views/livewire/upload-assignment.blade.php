@@ -39,19 +39,27 @@
         class="mt-6 block max-w-md mx-auto p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <a :href="previewUrl" target="_blank" class="group">
             <div class="flex items-center gap-3 bg-gray-700 text-gray-700 dark:text-gray-200 p-4 rounded-md">
-                <div>
-                    <svg class="w-8 h-8 text-gray-800 dark:text-gray-200" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        viewBox="0 0 24 24">
-                        <path fill-rule="evenodd"
-                            d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2 2 2 0 0 0 2 2h12a2 2 0 0 0 2-2 2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2V4a2 2 0 0 0-2-2h-7Zm-6 9a1 1 0 0 0-1 1v5a1 1 0 1 0 2 0v-1h.5a2.5 2.5 0 0 0 0-5H5Zm1.5 3H6v-1h.5a.5.5 0 0 1 0 1Zm4.5-3a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h1.376A2.626 2.626 0 0 0 15 15.375v-1.75A2.626 2.626 0 0 0 12.375 11H11Zm1 5v-3h.375a.626.626 0 0 1 .625.626v1.748a.625.625 0 0 1-.626.626H12Zm5-5a1 1 0 0 0-1 1v5a1 1 0 1 0 2 0v-1h1a1 1 0 1 0 0-2h-1v-1h1a1 1 0 1 0 0-2h-2Z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <div>
-                    <p class="line-clamp-1 group-hover:underline" x-text="fileName"></p>
-                    <p class="text-xs text-gray-400" x-text="fileSize"></p>
-                </div>
+
+                @error('file')
+                    <p class="text-red-400 w-full text-center text-sm">{{ $message }}</p>
+                @enderror
+
+                @if (!$errors->any())
+                    <div>
+                        <svg class="w-8 h-8 text-gray-800 dark:text-gray-200" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2 2 2 0 0 0 2 2h12a2 2 0 0 0 2-2 2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2V4a2 2 0 0 0-2-2h-7Zm-6 9a1 1 0 0 0-1 1v5a1 1 0 1 0 2 0v-1h.5a2.5 2.5 0 0 0 0-5H5Zm1.5 3H6v-1h.5a.5.5 0 0 1 0 1Zm4.5-3a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h1.376A2.626 2.626 0 0 0 15 15.375v-1.75A2.626 2.626 0 0 0 12.375 11H11Zm1 5v-3h.375a.626.626 0 0 1 .625.626v1.748a.625.625 0 0 1-.626.626H12Zm5-5a1 1 0 0 0-1 1v5a1 1 0 1 0 2 0v-1h1a1 1 0 1 0 0-2h-1v-1h1a1 1 0 1 0 0-2h-2Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="line-clamp-1 group-hover:underline" x-text="fileName"></p>
+                        <p class="text-xs text-gray-400" x-text="fileSize"></p>
+                    </div>
+                @endif
+
             </div>
         </a>
 
@@ -59,14 +67,19 @@
             <div class="mt-6">
                 <button type="button" x-on:click="resetUpload"
                     class="block w-full py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 
-            dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Ubah</button>
+        dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Ubah</button>
 
-                <button type="submit"
-                    class="block w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 
-                dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Submit</button>
+                @if (!$errors->any())
+                    <button type="submit" wire:loading.attr="disabled"
+                        class="block w-full text-white bg-blue-700 disabled:opacity-50 disabled:cursor-wait hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 
+        dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                        <span wire:loading wire:target="uploadAssignment">Process...</span>
+                        <span wire:loading.class="hidden" wire:target="uploadAssignment">Submit</span>
+                    </button>
+                @endif
+
         </form>
     </div>
-</div>
 </div>
 
 <script>
@@ -79,7 +92,6 @@
 
             getFileInfo(e) {
                 const file = e.target.files[0];
-
                 this.fileName = file.name;
 
                 const size = file.size / 1048576;
