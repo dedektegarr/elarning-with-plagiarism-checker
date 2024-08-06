@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Assignment extends Model
+class Submission extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'assignment_id';
-    protected $guarded = ['assignment_id'];
+    protected $primaryKey = 'submission_id';
+    protected $guarded = ['submission_id'];
 
     public function topic()
     {
@@ -19,6 +19,11 @@ class Assignment extends Model
 
     public function metadata()
     {
-        return $this->hasOne(Metadata::class, 'assignment_id');
+        return $this->hasOne(Metadata::class, 'submission_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

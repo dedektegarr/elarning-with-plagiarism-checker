@@ -17,8 +17,8 @@ class Topic extends Model
         return $this->belongsTo(Subject::class, 'subject_id');
     }
 
-    public function assignment()
+    public function submission()
     {
-        return $this->hasOne(Assignment::class, 'topic_id');
+        return $this->hasOne(Submission::class, 'topic_id');
     }
 }

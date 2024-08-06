@@ -34,4 +34,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Subject::class, 'user_subject', 'user_id', 'subject_id');
     }
+
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class, 'user_id');
+    }
 }

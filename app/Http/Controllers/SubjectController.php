@@ -21,12 +21,12 @@ class SubjectController extends Controller
         return view('pages.subject.show', ['title' => $subject->name, 'subject' => $subject, 'student_count' => $studentCount]);
     }
 
-    public function assignment(Subject $subject, Topic $topic)
+    public function submission(Subject $subject, Topic $topic)
     {
         $users = $subject->users->filter(function ($user) {
             return $user->role === 'student';
         });
 
-        return view('pages.subject.assignment', ['title' => "Tugas: " . $topic->name]);
+        return view('pages.subject.submission', ['title' => "Tugas: " . $topic->name]);
     }
 }

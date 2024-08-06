@@ -3,13 +3,13 @@
 namespace App\Livewire;
 
 use App\Helpers\PDFService;
-use App\Models\Assignment;
+use App\Models\Submission;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
 
-class UploadAssignment extends Component
+class UploadSubmission extends Component
 {
     use WithFileUploads;
 
@@ -25,7 +25,7 @@ class UploadAssignment extends Component
         ]);
     }
 
-    public function uploadAssignment(PDFService $pdfService)
+    public function uploadSubmission(PDFService $pdfService)
     {
         $pathname = $this->file->getPathname();
 
@@ -49,19 +49,19 @@ class UploadAssignment extends Component
         // Upload file and get pathname
         $uploadedFile = $pdfService->uploadPdf($this->file);
 
-        // Store assignment
-        $assignment = Assignment::create([
+        // Store submission
+        $submission = Submission::create([
             'topic_id' => $this->topic->topic_id,
             'user_id' => Auth::user()->user_id,
             'file' => $uploadedFile
         ]);
 
         // store metadata
-        $assignment->metadata()->create($metadata);
+        $submission->metadata()->create($metadata);
     }
 
     public function render()
     {
-        return view('livewire.upload-assignment');
+        return view('livewire.upload-submission');
     }
 }

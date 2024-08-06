@@ -8,6 +8,7 @@ use Livewire\Attributes\On;
 use Illuminate\Support\Collection;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Footer;
 use PowerComponents\LivewirePowerGrid\Header;
@@ -43,7 +44,7 @@ final class SubjectTable extends PowerGridComponent
 
     public function noDataLabel(): string|View
     {
-        return "Data tidak ditemukan";
+        return "Tidak ada kelas";
     }
 
     #[On('subject-updated')]
@@ -103,7 +104,7 @@ final class SubjectTable extends PowerGridComponent
 
     public function columns(): array
     {
-        return [
+        $columns = [
             Column::make('Kode kelas', 'code')
                 ->bodyAttribute('font-bold')
                 ->searchable(),
@@ -113,11 +114,18 @@ final class SubjectTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Dosen pengampu', 'teachers')->bodyAttribute('capitalize')->searchable()->sortable(),
+            Column::make('Dosen pengampu', 'teachers')
+                ->bodyAttribute('capitalize')
+                ->searchable()
+                ->sortable(),
 
             Column::make('Jumlah mahasiswa', 'student_count'),
-
-            Column::action('Aksi')
         ];
+
+        if (Gate::allows(['edit-subject', 'delete-subject'])) {
+            $columns[] = Column::action('Aksi');
+        }
+
+        return $columns;
     }
 }

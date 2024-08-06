@@ -12,8 +12,8 @@ class Metadata extends Model
     protected $primaryKey = 'metadata_id';
     protected $guarded = ['metadata_id'];
 
-    public function assignment()
+    public function submission()
     {
-        return $this->belongsTo(Assignment::class, 'metadata_id');
+        return $this->belongsTo(Submission::class, 'metadata_id');
     }
 }

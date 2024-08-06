@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('metadata', function (Blueprint $table) {
             $table->id('metadata_id');
-            $table->unsignedBigInteger('assignment_id');
+            $table->unsignedBigInteger('submission_id');
             $table->string('title', 100)->nullable();
             $table->string('author', 80)->nullable();
             $table->string('creator', 80)->nullable();
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->text('word_tokens');
             $table->timestamps();
 
-            $table->foreign('assignment_id')->references('assignment_id')->on('assignments')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('submission_id')->references('submission_id')->on('submissions')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\SubmissionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/subjects/{subject}/topics', [SubjectController::class, 'show'])->name('subject.show');
     // Route::get('/subjects/{subject}/topics/{topic}', [SubjectController::class, 'assignment'])->name('subject.assignment');
 
-    Route::get('/assignments/{topic}', [AssignmentController::class, 'show'])->name('assignment.show');
+    Route::get('/submissions/{topic}', [SubmissionController::class, 'show'])->name('submission.show');
+    Route::get('/submissions/{topic}/{user:username}', [SubmissionController::class, 'studentSubmission'])->name('submission.student');
 
 
 

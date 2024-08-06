@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use PowerComponents\LivewirePowerGrid\Column;
@@ -31,6 +32,11 @@ final class StudentTable extends PowerGridComponent
             Footer::make()
                 ->showPerPage()
         ];
+    }
+
+    public function noDataLabel(): string|View
+    {
+        return "Tidak ada mahasiswa";
     }
 
     public function fields(): PowerGridFields
