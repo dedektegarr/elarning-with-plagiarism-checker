@@ -46,6 +46,10 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         // Submission
+
+        Gate::define('view-my-submissions', function (User $user) {
+            return $user->role === 'student';
+        });
         Gate::define('upload-submission', function (User $user) {
             return $user->role === 'student';
         });

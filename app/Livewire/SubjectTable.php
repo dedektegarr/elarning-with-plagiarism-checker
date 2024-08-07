@@ -50,7 +50,7 @@ final class SubjectTable extends PowerGridComponent
     #[On('subject-updated')]
     public function datasource(): ?Collection
     {
-        $user = User::where('user_id', Auth::user()->user_id)->first();
+        $user = User::with('subjects')->where('user_id', Auth::user()->user_id)->first();
         $userSubjects = $user->subjects->map(function ($subject, $index) {
             $subject->teachers = $subject->users->filter(function ($user) {
                 return $user->role === 'teacher';

@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/subjects/{subject}/topics', [SubjectController::class, 'show'])->name('subject.show');
     // Route::get('/subjects/{subject}/topics/{topic}', [SubjectController::class, 'assignment'])->name('subject.assignment');
 
+
+    Route::get('/submissions', [SubmissionController::class, 'index'])->name('submission.index');
     Route::get('/submissions/{topic}', [SubmissionController::class, 'show'])->name('submission.show');
     Route::get('/submissions/{topic}/{user:username}', [SubmissionController::class, 'studentSubmission'])->name('submission.student');
 

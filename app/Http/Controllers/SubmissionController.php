@@ -4,14 +4,42 @@ namespace App\Http\Controllers;
 
 use App\Models\Topic;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SubmissionController extends Controller
 {
+    public function index()
+    {
+        $topics = Auth::user()->subjects->flatMap(function ($subject) {
+            return $subject->topics;
+        });
+
+        $topics = $topics->map(function ($topic) {
+            $topic['translated_date'] = Carbon::parse($topic->created_at)->translatedFormat('j F Y');
+            $topic['turned_in'] = User::where('role', 'student')->get()->filter(function ($user) use ($topic) {
+                $turnedInUser = $user->submissions->filter(function ($submission) use ($topic) {
+                    return $submission->topic_id === $topic->topic_id;
+                });
+
+                return $turnedInUser->count() > 0;
+            })->count();
+            $topic['assigned'] = $topic->subject->users->filter(function ($user) {
+                return $user->role === 'student';
+            })->count();
+
+            $topic['is_current_user_turned_in'] = $topic->submission?->user_id === Auth::user()->user_id;
+
+            return $topic;
+        });
+
+        return view('pages.submission.index', ['title' => 'Tugas Mahasiswa', 'topics' => $topics]);
+    }
+
     public function show(Topic $topic)
     {
-        $users = User::all()->filter(function ($user) {
+        $users = $topic->subject->users->filter(function ($user) {
             return $user->role === 'student';
         })->map(function ($user) use ($topic) {
             $user['isTurnedIn'] = $user->submissions
