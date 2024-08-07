@@ -57,4 +57,11 @@ class SubmissionController extends Controller
 
         return view('pages.submission.show', ['title' => 'Tugas: ' . $topic->name, 'students' => $users, 'topic' => $topic, 'isCurrentUserTurnedIn' => $isCurrentUserTurnedIn]);
     }
+
+    public function studentSubmission(Topic $topic, $username)
+    {
+        $user = User::where('username', $username)->first();
+
+        return view('pages.submission.details', ['title' => 'Tugas ' . $topic->name . ': ' . $user->name]);
+    }
 }
