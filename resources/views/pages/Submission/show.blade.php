@@ -25,7 +25,7 @@
         <ul class="max-w-lg mx-auto divide-y divide-gray-200 dark:divide-gray-700">
             @forelse ($students as $student)
                 <li class="">
-                    <a href="{{ route('submission.student', [$topic->topic_id, $student->username]) }}">
+                    <a href="{{ route('submission.student', [$student->submission_id, $student->username]) }}">
                         <div class="flex items-center space-x-4 rtl:space-x-reverse hover:bg-gray-800 p-4 rounded-md">
                             <div class="flex-shrink-0">
                                 <img class="w-8 h-8 rounded-full" src="{{ asset('/static/default-pfp.jpg') }}"

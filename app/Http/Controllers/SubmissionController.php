@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Submission;
 use App\Models\Topic;
 use App\Models\User;
 use Carbon\Carbon;
@@ -29,7 +30,10 @@ class SubmissionController extends Controller
                 return $user->role === 'student';
             })->count();
 
-            $topic['is_current_user_turned_in'] = $topic->submission?->user_id === Auth::user()->user_id;
+            // $topic['is_current_user_turned_in'] = $topic->submission?->user_id === Auth::user()->user_id;
+            $topic['is_current_user_turned_in'] = Auth::user()->submissions->filter(function ($submission) use ($topic) {
+                return $submission->topic_id === $topic->topic_id;
+            })->count() > 0;
 
             return $topic;
         });
@@ -48,6 +52,10 @@ class SubmissionController extends Controller
                 })
                 ->count() > 0;
 
+            $user['submission_id'] = $user->submissions->filter(function ($submission) use ($user, $topic) {
+                return ($submission->user_id === $user->user_id) && ($submission->topic_id === $topic->topic_id);
+            })->map(fn ($submission) => $submission->submission_id)[0];
+
             return $user;
         });
 
@@ -58,10 +66,12 @@ class SubmissionController extends Controller
         return view('pages.submission.show', ['title' => 'Tugas: ' . $topic->name, 'students' => $users, 'topic' => $topic, 'isCurrentUserTurnedIn' => $isCurrentUserTurnedIn]);
     }
 
-    public function studentSubmission(Topic $topic, $username)
+    public function studentSubmission(Submission $submission, $username)
     {
         $user = User::where('username', $username)->first();
+        $submission->metadata->creation_date = Carbon::parse($submission->metadata->creation_date)->translatedFormat('j F Y');
+        $submission->metadata->mod_date = Carbon::parse($submission->metadata->mod_date)->translatedFormat('j F Y');
 
-        return view('pages.submission.details', ['title' => 'Tugas ' . $topic->name . ': ' . $user->name]);
+        return view('pages.submission.details', ['title' => 'Tugas ' . $submission->topic->name . ': ' . $user->name, 'submission' => $submission]);
     }
 }

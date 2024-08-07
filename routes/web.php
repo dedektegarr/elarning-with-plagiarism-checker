@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/submissions', [SubmissionController::class, 'index'])->name('submission.index');
     Route::get('/submissions/{topic}', [SubmissionController::class, 'show'])->name('submission.show');
-    Route::get('/submissions/{topic}/{username}', [SubmissionController::class, 'studentSubmission'])->name('submission.student');
+    Route::get('/submissions/{submission}/{username}', [SubmissionController::class, 'studentSubmission'])->name('submission.student');
 
 
 
