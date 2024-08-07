@@ -24,9 +24,18 @@
     @can('view-submissions')
         <ul class="max-w-lg mx-auto divide-y divide-gray-200 dark:divide-gray-700">
             @forelse ($students as $student)
+                @php
+                    $link = route('submission.student', [$student->submission_id, $student->username]);
+
+                    if (!$student->submission_id) {
+                        $link = '#';
+                    }
+                @endphp
+
                 <li class="">
-                    <a href="{{ route('submission.student', [$student->submission_id, $student->username]) }}">
-                        <div class="flex items-center space-x-4 rtl:space-x-reverse hover:bg-gray-800 p-4 rounded-md">
+                    <a href="{{ $link }}">
+                        <div
+                            class="{{ !$student->submission_id ? 'opacity-50 cursor-not-allowed' : '' }} flex items-center space-x-4 rtl:space-x-reverse hover:bg-gray-800 p-4 rounded-md">
                             <div class="flex-shrink-0">
                                 <img class="w-8 h-8 rounded-full" src="{{ asset('/static/default-pfp.jpg') }}"
                                     alt="{{ $student->name }}">
@@ -42,7 +51,7 @@
                                 </p>
                             </div>
 
-                            @if ($student->isTurnedIn)
+                            @if ($student->submission_id)
                                 <span
                                     class="inline-flex items-center bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
                                     <span class="w-2 h-2 me-1 bg-green-500 rounded-full"></span>

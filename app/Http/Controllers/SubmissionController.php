@@ -46,15 +46,15 @@ class SubmissionController extends Controller
         $users = $topic->subject->users->filter(function ($user) {
             return $user->role === 'student';
         })->map(function ($user) use ($topic) {
-            $user['isTurnedIn'] = $user->submissions
-                ->filter(function ($submission) use ($topic) {
-                    return $submission->topic_id === $topic->topic_id;
-                })
-                ->count() > 0;
+            // $user['isTurnedIn'] = $user->submissions
+            //     ->filter(function ($submission) use ($topic) {
+            //         return $submission->topic_id === $topic->topic_id;
+            //     })
+            //     ->count() > 0;
 
             $user['submission_id'] = $user->submissions->filter(function ($submission) use ($user, $topic) {
                 return ($submission->user_id === $user->user_id) && ($submission->topic_id === $topic->topic_id);
-            })->map(fn ($submission) => $submission->submission_id)[0];
+            })->map(fn ($submission) => $submission->submission_id)->join('');
 
             return $user;
         });
