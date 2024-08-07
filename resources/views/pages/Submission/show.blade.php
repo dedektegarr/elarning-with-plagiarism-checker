@@ -23,7 +23,7 @@
 
     @can('view-submissions')
         <ul class="max-w-lg mx-auto divide-y divide-gray-200 dark:divide-gray-700">
-            @foreach ($students as $student)
+            @forelse ($students as $student)
                 <li class="">
                     <a href="{{ route('submission.student', [$topic->topic_id, $student->username]) }}">
                         <div class="flex items-center space-x-4 rtl:space-x-reverse hover:bg-gray-800 p-4 rounded-md">
@@ -58,7 +58,11 @@
                         </div>
                     </a>
                 </li>
-            @endforeach
+            @empty
+                <div class="p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
+                    <p class="text-sm text-gray-500 dark:text-gray-400 text-center">Tidak ada tugas</p>
+                </div>
+            @endforelse
         </ul>
     @endcan
 @endsection

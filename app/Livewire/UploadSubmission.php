@@ -58,6 +58,9 @@ class UploadSubmission extends Component
 
         // store metadata
         $submission->metadata()->create($metadata);
+
+        flash('Tugas berhasil di upload', 'success');
+        return redirect()->back();
     }
 
     public function render()
