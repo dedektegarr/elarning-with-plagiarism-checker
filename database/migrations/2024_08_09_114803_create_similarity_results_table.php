@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('similarity_result_id');
             $table->unsignedBigInteger('submission_id');
             $table->unsignedBigInteger('compared_submission_id');
-            $table->float('cosim_result');
+            $table->float('cosim_result', 15, 10);
             $table->timestamps();
 
             $table->foreign('submission_id')->references('submission_id')->on('submissions')->onDelete('cascade')->onUpdate('cascade');
