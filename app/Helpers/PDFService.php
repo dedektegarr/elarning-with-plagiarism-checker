@@ -32,4 +32,14 @@ class PDFService
 
         return $output;
     }
+
+    public function calculateSimilarity($word_tokens_path)
+    {
+        $scriptPath = "../app/Python/Calculate.py";
+        $escapedWordTokensPath = escapeshellarg($word_tokens_path);
+        $command = escapeshellcmd("python $scriptPath $escapedWordTokensPath");
+
+        $output = shell_exec($command);
+        return $output;
+    }
 }
