@@ -26,4 +26,14 @@ class Submission extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function similarityResults()
+    {
+        return $this->hasMany(SimilarityResult::class, 'submission_id');
+    }
+
+    public function comparedSimilarityResults()
+    {
+        return $this->hasMany(SimilarityResult::class, 'compared_submission_id');
+    }
 }

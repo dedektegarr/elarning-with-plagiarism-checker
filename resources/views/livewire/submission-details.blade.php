@@ -148,8 +148,9 @@
         </div>
     </section>
 
-
-    <section id="test">
-        <h1>test</h1>
-    </section>
+    @if ($submission->similarityResults->count())
+        <section id="test">
+            <h1>test</h1>
+        </section>
+    @endif
 </div>

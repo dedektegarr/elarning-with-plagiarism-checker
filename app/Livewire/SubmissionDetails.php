@@ -54,7 +54,9 @@ class SubmissionDetails extends Component
                 'updated_at' => $timestamp,
             ];
         }
-        dd($data);
+
+        $this->submission->similarityResults()->insert($data);
+        dd($this->submission->similarityResults);
     }
 
     public function checkPlagiarism(PDFService $pdfService)
@@ -73,8 +75,6 @@ class SubmissionDetails extends Component
         $cosim_results = array_slice($cosim_results, 1);
 
         $this->saveSimilarityResults($this->submission->submission_id, $reference_texts, $cosim_results);
-
-        dd($cosim_results);
     }
 
     public function render()
