@@ -2,9 +2,10 @@
 
 namespace App\Livewire;
 
-use App\Helpers\PDFService;
-use App\Models\Metadata;
 use Livewire\Component;
+use App\Models\Metadata;
+use App\Helpers\PDFService;
+use Livewire\Attributes\On;
 
 class SubmissionDetails extends Component
 {
@@ -56,7 +57,8 @@ class SubmissionDetails extends Component
         }
 
         $this->submission->similarityResults()->insert($data);
-        dd($this->submission->similarityResults);
+        $this->dispatch('result-updated');
+        flash('Tugas selesai diperiksa', 'success');
     }
 
     public function checkPlagiarism(PDFService $pdfService)
@@ -77,6 +79,7 @@ class SubmissionDetails extends Component
         $this->saveSimilarityResults($this->submission->submission_id, $reference_texts, $cosim_results);
     }
 
+    #[On('result-updated')]
     public function render()
     {
         return view('livewire.submission-details');

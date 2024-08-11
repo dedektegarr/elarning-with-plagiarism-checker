@@ -60,7 +60,7 @@ class UploadSubmission extends Component
         $submission->metadata()->create($metadata);
 
         flash('Tugas berhasil di upload', 'success');
-        return redirect()->back();
+        return redirect()->route('submission.index');
     }
 
     public function render()

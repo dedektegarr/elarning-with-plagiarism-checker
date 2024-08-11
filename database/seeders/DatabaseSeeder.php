@@ -37,6 +37,20 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('password')
             ],
             [
+                'name' => 'Alzah Fariski',
+                'username' => 'G1F020026',
+                'gender' => 'female',
+                'role' => 'student',
+                'password' => bcrypt('password')
+            ],
+            [
+                'name' => 'Cahyono',
+                'username' => 'G1F020025',
+                'gender' => 'female',
+                'role' => 'student',
+                'password' => bcrypt('password')
+            ],
+            [
                 'name' => 'Endina Putri Purwandari',
                 'username' => '9999999999',
                 'gender' => 'female',

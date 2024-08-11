@@ -3,12 +3,16 @@
 @section('content')
     @can('upload-submission')
         @if ($isCurrentUserTurnedIn)
-            <div>
-                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-300"
-                    role="alert">
-                    Anda sudah mengumpulkan tugas pada topik ini!
+            @if ($submission->similarityResults->count())
+                <livewire:submission-details :submission="$submission" />
+            @else
+                <div>
+                    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                        role="alert">
+                        Anda sudah mengumpulkan tugas pada topik ini, Dosen akan memeriksa tugas anda
+                    </div>
                 </div>
-            </div>
+            @endif
         @else
             <div>
                 <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300"
