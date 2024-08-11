@@ -22,7 +22,7 @@
 
     <div id="default-tab-content">
         <div class="hidden" id="topic" role="tabpanel" aria-labelledby="topic-tab">
-            <x-modal title="Buat Topik" id="add-topic-modal">
+            <x-modal title="Buat Topik" id="add-topic-modal" size="max-w-md">
                 <livewire:topic-form :subjectId="$subject->subject_id" />
             </x-modal>
 

@@ -44,19 +44,32 @@
                                 {{ number_format($result->cosim_result * 100, 2) }}%
                             </td>
                             <td class="px-6 py-4">
-                                <a href="#"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Bandingkan
-                                    Dokumen</a>
+                                <button type="button"
+                                    data-modal-target="compare-modal-{{ $result->similarity_result_id }}"
+                                    data-modal-toggle="compare-modal-{{ $result->similarity_result_id }}"
+                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Lihat
+                                    Perbandingan</button>
                             </td>
                         </tr>
+
+                        <x-modal id="compare-modal-{{ $result->similarity_result_id }}" :title="'Perbandingan dengan tugas ' . $result->comparedSubmission->user->name"
+                            size="max-w-[98%]">
+                            <div class="grid grid-cols-2">
+                                <div>
+                                    <iframe class="w-full h-screen"
+                                        src="{{ asset('storage/' . $result->submission->file) }}"
+                                        frameborder="0"></iframe>
+                                </div>
+                                <div>
+                                    <iframe class="w-full h-screen"
+                                        src="{{ asset('storage/' . $result->comparedSubmission->file) }}"
+                                        frameborder="0"></iframe>
+                                </div>
+                        </x-modal>
                     @endforeach
 
                 </tbody>
             </table>
         </div>
     </div>
-
-
-
-
 </div>

@@ -53,11 +53,17 @@ class SubmissionController extends Controller
             return $user;
         });
 
-        $isCurrentUserTurnedIn = Auth::user()->submissions->filter(function ($submission) use ($topic) {
+        $submission = Auth::user()->submissions->filter(function ($submission) use ($topic) {
             return $submission->topic_id === $topic->topic_id;
-        })->count() > 0;
+        });
 
-        return view('pages.submission.show', ['title' => 'Tugas: ' . $topic->name, 'students' => $users, 'topic' => $topic, 'isCurrentUserTurnedIn' => $isCurrentUserTurnedIn, 'submission' => $topic->submission]);
+        return view('pages.submission.show', [
+            'title' => 'Tugas: ' . $topic->name,
+            'students' => $users,
+            'topic' => $topic,
+            'isCurrentUserTurnedIn' => $submission->count() > 0,
+            'submission' => $submission->count() ? $submission[0] : null
+        ]);
     }
 
     public function studentSubmission(Submission $submission, $username)
